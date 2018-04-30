@@ -3,6 +3,7 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="FirstGame/Controller/SpaceGame.cs">
     <Files>
       <File FileName="FirstGame/Controller/SpaceGame.cs" Line="12" Column="24" />
+      <File FileName="FirstGame/Model/Player.cs" Line="63" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
