@@ -76,7 +76,6 @@ namespace FirstGame.Model
 			playerAnimation.Update(gameTime);
 		}
 
-
 		// Draw the player
 		public void Draw(SpriteBatch spriteBatch)
 		{

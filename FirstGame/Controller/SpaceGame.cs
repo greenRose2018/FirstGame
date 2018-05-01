@@ -59,8 +59,8 @@ namespace FirstGame.Controller
 		/// </summary>
 		protected override void LoadContent()
 		{
-			//// Create a new SpriteBatch, which can be used to draw textures.
-			//spriteBatch = new SpriteBatch(GraphicsDevice);
+			// Create a new SpriteBatch, which can be used to draw textures.
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 			////Load the player resources
 			//Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, 
 			//			                         GraphicsDevice.Viewport.TitleSafeArea.Y + 
