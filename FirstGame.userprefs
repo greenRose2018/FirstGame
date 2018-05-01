@@ -1,11 +1,12 @@
 ﻿<Properties StartupConfiguration="{3E7230E4-BABB-47A9-8B49-2E969991D9D8}|Default">
   <MonoDevelop.Ide.ItemProperties.FirstGame PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="FirstGame/View/ParallaxingBackground.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FirstGame/Model/Enemy.cs">
     <Files>
       <File FileName="FirstGame/Model/Player.cs" Line="78" Column="3" />
       <File FileName="FirstGame/View/Animation.cs" Line="8" Column="25" />
-      <File FileName="FirstGame/Controller/SpaceGame.cs" Line="67" Column="93" />
-      <File FileName="FirstGame/View/ParallaxingBackground.cs" Line="2" Column="23" />
+      <File FileName="FirstGame/Controller/SpaceGame.cs" Line="132" Column="24" />
+      <File FileName="FirstGame/View/ParallaxingBackground.cs" Line="75" Column="4" />
+      <File FileName="FirstGame/Model/Enemy.cs" Line="4" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
