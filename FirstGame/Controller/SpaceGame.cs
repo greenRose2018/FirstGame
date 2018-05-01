@@ -1,17 +1,22 @@
 ﻿using System;
 
+using FirstGame.Model;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace FirstGame
+namespace FirstGame.Controller
 {
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
+	/// 
+
+
 	public class SpaceGame : Game
 	{
+		private Player player;		
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
@@ -19,6 +24,7 @@ namespace FirstGame
 		{
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+
 		}
 
 		/// <summary>
@@ -31,6 +37,7 @@ namespace FirstGame
 		{
 			// TODO: Add your initialization logic here
 
+			player = new Player();		
 			base.Initialize();
 		}
 
@@ -42,8 +49,12 @@ namespace FirstGame
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
+			//Load the player resources
+			Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, 
+						                         GraphicsDevice.Viewport.TitleSafeArea.Y + 
+			                                     GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
 
-			//TODO: use this.Content to load your game content here 
+			player.Initialize(Content.Load<Texture2D>("Texture/player"), playerPosition);
 		}
 
 		/// <summary>
@@ -73,7 +84,13 @@ namespace FirstGame
 		{
 			graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			//TODO: Add your drawing code here
+			// Start drawing 
+			spriteBatch.Begin(); 
+			// Draw the Player 
+			player.Draw(spriteBatch); 
+			// Stop drawing 
+			spriteBatch.End();
+
 
 			base.Draw(gameTime);
 		}
