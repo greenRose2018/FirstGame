@@ -14,6 +14,13 @@ namespace FirstGame.Controller
 	/// </summary>
 	public class SpaceGame : Game
 	{
+		// Image used to display the static background
+		private Texture2D mainBackground;
+
+		// Parallaxing Layers
+		private ParallaxingBackground bgLayer1;
+		private ParallaxingBackground bgLayer2;
+
 		// Keyboard states used to determine key presses
 		private KeyboardState currentKeyboardState;
 		private KeyboardState previousKeyboardState;
@@ -45,10 +52,10 @@ namespace FirstGame.Controller
 		/// </summary>
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
-
 			player = new Player();
 			playerMoveSpeed = 8.0f;
+			bgLayer1 = new ParallaxingBackground();
+			bgLayer2 = new ParallaxingBackground();
 
 			base.Initialize();
 		}
@@ -75,6 +82,13 @@ namespace FirstGame.Controller
 
 			Vector2 playerPosition = new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + GraphicsDevice.Viewport.TitleSafeArea.Height / 2);
 			player.Initialize(playerAnimation, playerPosition);
+
+			// Load the parallaxing background
+			bgLayer1.Initialize(Content, "Texture/bgLayer1", GraphicsDevice.Viewport.Width, -1);
+			bgLayer2.Initialize(Content, "Texture/bgLayer2", GraphicsDevice.Viewport.Width, -2);
+
+			mainBackground = Content.Load<Texture2D>("Texture/mainbackground");
+
 		}
 
 		/// <summary>
@@ -115,7 +129,10 @@ namespace FirstGame.Controller
 			graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			// Start drawing 
-			spriteBatch.Begin(); 
+			spriteBatch.Begin();
+			// Draw the moving background
+			bgLayer1.Draw(spriteBatch);
+			bgLayer2.Draw(spriteBatch);
 			// Draw the Player 
 			player.Draw(spriteBatch); 
 			// Stop drawing 
@@ -128,6 +145,9 @@ namespace FirstGame.Controller
 		private void UpdatePlayer(GameTime gameTime)
 		{
 			player.Update(gameTime);
+			// Update the parallaxing background
+			bgLayer1.Update();
+			bgLayer2.Update();
 
 			// Get Thumbstick Controls
 			player.Position.X += currentGamePadState.ThumbSticks.Left.X * playerMoveSpeed;
