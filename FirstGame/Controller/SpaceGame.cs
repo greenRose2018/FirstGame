@@ -14,6 +14,9 @@ namespace FirstGame.Controller
 	/// </summary>
 	public class SpaceGame : Game
 	{
+		private Texture2D explosionTexture;
+		private List<Animation> explosions;
+
 		private Texture2D projectileTexture;
 		private List<Projectile> projectiles;
 
@@ -92,6 +95,8 @@ namespace FirstGame.Controller
 			// Set the laser to fire every quarter second
 			fireTime = TimeSpan.FromSeconds(.15f);
 
+			explosions = new List<Animation>();
+
 			base.Initialize();
 		}
 
@@ -121,6 +126,8 @@ namespace FirstGame.Controller
 			mainBackground = Content.Load<Texture2D>("Texture/mainbackground");
 
 			projectileTexture = Content.Load<Texture2D>("Texture/laser");
+
+			explosionTexture = Content.Load<Texture2D>("Animation/explosion");
 
 
 		}
@@ -160,6 +167,8 @@ namespace FirstGame.Controller
 			UpdateCollision();
 			// Update the projectiles
 			UpdateProjectiles();
+			// Update the explosions
+			UpdateExplosions(gameTime);
 			base.Update(gameTime);
 		}
 
@@ -187,6 +196,11 @@ namespace FirstGame.Controller
 			for (int i = 0; i<projectiles.Count; i++)
 			{
 			    projectiles[i].Draw(spriteBatch);
+			}
+			// Draw the explosions
+			for (int i = 0; i<explosions.Count; i++)
+			{
+			    explosions[i].Draw(spriteBatch);
 			}
 
 
@@ -275,6 +289,13 @@ namespace FirstGame.Controller
 			{
 				enemies[i].Update(gameTime);
 
+				// If not active and health <= 0
+				if (enemies[i].Health <= 0)
+				{
+					// Add an explosion
+					AddExplosion(enemies[i].Position);
+				}
+
 				if (enemies[i].Active == false)
 				{
 					enemies.RemoveAt(i);
@@ -343,6 +364,7 @@ namespace FirstGame.Controller
 			projectile.Initialize(GraphicsDevice.Viewport, projectileTexture, position);
 			projectiles.Add(projectile);
 		}
+
 		private void UpdateProjectiles()
 		{
 			// Update the Projectiles
@@ -353,6 +375,25 @@ namespace FirstGame.Controller
 				if (projectiles[i].Active == false)
 				{
 					projectiles.RemoveAt(i);
+				}
+			}
+		}
+
+		private void AddExplosion(Vector2 position)
+		{
+			Animation explosion = new Animation();
+			explosion.Initialize(explosionTexture, position, 134, 134, 12, 45, Color.White, 1f, false);
+			explosions.Add(explosion);
+		}
+
+		private void UpdateExplosions(GameTime gameTime)
+		{
+			for (int i = explosions.Count - 1; i >= 0; i--)
+			{
+				explosions[i].Update(gameTime);
+				if (explosions[i].Active == false)
+				{
+					explosions.RemoveAt(i);
 				}
 			}
 		}
