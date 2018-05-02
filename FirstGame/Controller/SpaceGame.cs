@@ -16,6 +16,11 @@ namespace FirstGame.Controller
 	/// </summary>
 	public class SpaceGame : Game
 	{
+
+		//Number that holds the player score
+		private int score;
+		// The font used to display UI elements
+		private SpriteFont font;
 		// The sound that is played when a laser is fired
 		private SoundEffect laserSound;
 
@@ -108,6 +113,9 @@ namespace FirstGame.Controller
 
 			explosions = new List<Animation>();
 
+			//Set player's score to zero
+			score = 0;
+
 			base.Initialize();
 		}
 
@@ -149,7 +157,6 @@ namespace FirstGame.Controller
 
 			// Start the music right away
 			PlayMusic(gameplayMusic);
-
 
 		}
 
@@ -203,27 +210,40 @@ namespace FirstGame.Controller
 
 			// Start drawing 
 			spriteBatch.Begin();
+
 			// Draw the moving background
 			bgLayer1.Draw(spriteBatch);
 			bgLayer2.Draw(spriteBatch);
+
 			// Draw the Player 
 			player.Draw(spriteBatch); 
+
 			// Draw the Enemies
 			for (int i = 0; i<enemies.Count; i++)
 			{
 			enemies[i].Draw(spriteBatch);
 			}
+
 			// Draw the Projectiles
 			for (int i = 0; i<projectiles.Count; i++)
 			{
 			    projectiles[i].Draw(spriteBatch);
 			}
+
 			// Draw the explosions
 			for (int i = 0; i<explosions.Count; i++)
 			{
 			    explosions[i].Draw(spriteBatch);
 			}
 
+			// Draw the score
+			//spriteBatch.DrawString(font, "score: " + score, new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, 
+			                                 //                           GraphicsDevice.Viewport.TitleSafeArea.Y), 
+			                       										//Color.White);
+			// Draw the player health
+			//spriteBatch.DrawString(font, "health: " + player.Health, new Vector2(GraphicsDevice.Viewport.TitleSafeArea.X, 
+			//                                                                     GraphicsDevice.Viewport.TitleSafeArea.Y + 30), 
+			//                       												Color.White);
 
 			base.Draw(gameTime);
 			// Stop drawing 
@@ -273,6 +293,14 @@ namespace FirstGame.Controller
 				laserSound.Play();
 			}
 
+			// reset score if player health goes to zero
+			if (player.Health <= 0)
+			{
+			    player.Health = 100;
+			    score = 0;
+			}
+
+
 		}
 
 		private void AddEnemy()
@@ -317,8 +345,12 @@ namespace FirstGame.Controller
 				{
 					// Add an explosion
 					AddExplosion(enemies[i].Position);
+
 					// Play the explosion sound
 					explosionSound.Play();
+
+					//Add to the player's score
+					score += enemies[i].ScoreValue;
 
 				}
 
