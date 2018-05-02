@@ -4,10 +4,10 @@
     <Files>
       <File FileName="FirstGame/Model/Player.cs" Line="78" Column="3" />
       <File FileName="FirstGame/View/Animation.cs" Line="145" Column="5" />
-      <File FileName="FirstGame/Controller/SpaceGame.cs" Line="190" Column="5" />
+      <File FileName="FirstGame/Controller/SpaceGame.cs" Line="203" Column="40" />
       <File FileName="FirstGame/View/ParallaxingBackground.cs" Line="75" Column="4" />
       <File FileName="FirstGame/Model/Enemy.cs" Line="118" Column="31" />
-      <File FileName="FirstGame/Model/Projectile.cs" Line="81" Column="3" />
+      <File FileName="FirstGame/Model/Projectile.cs" Line="83" Column="57" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
